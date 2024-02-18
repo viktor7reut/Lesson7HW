@@ -1,8 +1,8 @@
 //Task1
 
 class Person {
-    var name: String
-    var surname: String
+    let name: String
+    let surname: String
     var age: Int
     
     init(name: String, surname: String, age: Int) {
@@ -25,20 +25,20 @@ class Director: Person {
 }
 
 class Adress {
-    var x: Int
-    var y: Int
-    var streetName: String
+    let coordinateX: Int
+    let coordinateY: Int
+    let streetName: String
     
     init(x: Int, y: Int, streetName: String) {
-        self.x = x
-        self.y = y
+        self.coordinateX = x
+        self.coordinateY = y
         self.streetName = streetName
     }
 }
 
 class Student: Person {
-    var classNumber: Int
-    var lessonAssesment: [(String, Int)]
+    private var classNumber: Int
+    private var lessonAssesment: [(String, Int)]
     
     init(name: String, surname: String, age: Int, classNumber: Int = 9, lessonAssesment: [(String, Int)] = []) {
         self.classNumber = classNumber
@@ -54,9 +54,9 @@ class Student: Person {
 
 class School {
     var students: [Student]
-    var schoolName: String
-    var adress: Adress
-    var director: Director
+    private let schoolName: String
+    private let adress: Adress
+    private var director: Director
     
     init(students: [Student], schoolName: String, adress: Adress, director: Director) {
         self.students = students
@@ -66,22 +66,22 @@ class School {
     }
     
     func infoToSchool() {
-        print("Школа: \(schoolName), Адресс: \(adress.streetName), Координаты: x - \(adress.x), y - \(adress.y), Количество учеников: \(students.count), Директор: \(director.surname) \(director.name), Опыт: \(director.experience), Рейтинг: \(director.rating) ")
+        print("Школа: \(schoolName), Адресс: \(adress.streetName), Координаты: x - \(adress.coordinateX), y - \(adress.coordinateY) \nКоличество учеников: \(students.count) \nДиректор: \(director.surname) \(director.name), Опыт: \(director.experience), Рейтинг: \(director.rating) ")
     }
 }
 
-let studentIvan: Student = Student(name: "Иван", surname: "Иванов", age: 13, classNumber: 7, lessonAssesment: [("Физика", 6)])
+let studentIvan: Student = Student(name: "Иван", surname: "Иванов", age: 13, classNumber: 7, lessonAssesment: [("Физика", 6), ("Информатика", 4), ("Биология", 7), ("Математика", 9)])
 let studentOleg: Student = Student(name: "Олег", surname: "Шовга", age: 13, lessonAssesment: [("Информатика", 9)])
 let studentNastia: Student = Student(name: "Анастасия", surname: "Пискур", age: 14, lessonAssesment: [("Математика", 4)])
 let studentOlga: Student = Student(name: "Ольга", surname: "Шовга", age: 13, lessonAssesment: [("Биология", 9)])
 let studentViktor: Student = Student(name: "Виктор", surname: "Реут", age: 14, lessonAssesment: [("Химия", 8)])
 let studentDenis: Student = Student(name: "Денис", surname: "Рукевич", age: 13, lessonAssesment: [("Физика", 6)])
 
-let students = [studentIvan, studentOleg, studentOlga, studentDenis, studentNastia, studentViktor]
+let students: [Student] = [studentIvan, studentOleg, studentOlga, studentDenis, studentNastia, studentViktor]
 
 let adreesSchool: Adress = Adress(x: 436265256, y: 23423545, streetName: "Центральная")
 
-let director = Director(name: "Алексей", surname: "Наумов", age: 40, experience: "10 лет", rating: "Отлично")
+let director: Director = Director(name: "Алексей", surname: "Наумов", age: 40, experience: "10 лет", rating: "Отлично")
 
 let school: School = School(students: students, schoolName: "Школа №1", adress: adreesSchool, director: director)
 
@@ -89,3 +89,5 @@ let school: School = School(students: students, schoolName: "Школа №1", a
 studentIvan.lessonAssesmentStudent()
 
 school.infoToSchool()
+
+students.forEach({ print("\($0.lessonAssesmentStudent())") })
